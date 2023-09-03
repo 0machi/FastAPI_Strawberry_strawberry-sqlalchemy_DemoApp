@@ -35,7 +35,7 @@
 
 	// Configure tool-specific properties.
 	"customizations": {
-		"vscode": {	
+		"vscode": {
 			"extensions": [
 				"be5invis.toml",
 				"ms-python.flake8",
