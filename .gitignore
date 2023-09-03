@@ -2,6 +2,6 @@ __pycache__
 .mypy_cashe
 .coverage
 coverage.xml
-html
+htmlcov
 .pytest_cache
 *.egg-info/
