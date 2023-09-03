@@ -1,0 +1,22 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.mypy_cache": true,
+        "**/.coverage": true,
+        "**/coverage.xml": true,
+        "**/.pytest_cache": true
+    },
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.testing.pytestArgs": [
+        "-s",
+        "-vv",
+        "--cov=src",
+        "--cov-report",
+        "xml"
+    ],
+    "coverage-gutters.showGutterCoverage": true,
+    "coverage-gutters.showLineCoverage": true,
+    "coverage-gutters.showRulerCoverage": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

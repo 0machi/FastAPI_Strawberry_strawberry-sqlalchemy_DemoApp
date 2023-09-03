@@ -1,0 +1,7 @@
+__pycache__
+.mypy_cashe
+.coverage
+coverage.xml
+html
+.pytest_cache
+*.egg-info/

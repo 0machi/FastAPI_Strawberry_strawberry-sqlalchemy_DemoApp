@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current Module",
+            "type": "python",
+            "request": "launch",
+            "module": "${command:extension.commandvariable.file.relativeDirDots}.${fileBasenameNoExtension}",
+            "justMyCode": true,
+            "args": []
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "purpose": [
+                "debug-test"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYTEST_ADDOPTS": "--no-cov"
+            }
+        }
+    ]
+}
