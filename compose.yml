@@ -3,8 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: development
+      target: dev
     volumes:
       - .:/app
     ports:
       - 8000:8000
+    env_file:
+      - dev.env

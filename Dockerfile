@@ -24,7 +24,7 @@ WORKDIR $PYSETUP_PATH
 COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install --only main --no-root
 
-FROM builder-base as development
+FROM builder-base as dev
 COPY --from=builder-base /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder-base $POETRY_HOME $POETRY_HOME
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
@@ -33,7 +33,7 @@ RUN poetry install --no-root
 WORKDIR /app
 ENTRYPOINT ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--reload"]
 
-FROM builder-base as production
+FROM builder-base as prod
 WORKDIR /app
 COPY --from=builder-base /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 ENTRYPOINT ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--reload"]
