@@ -1,4 +1,4 @@
-# FastAPI を Docker で動かすための環境を用意してみる
+# FastAPI と Strawberry を Docker で動かすための環境を用意してみる
 ## 起動方法
 - $ docker compose build --no-cache
 - $ docker compose up
