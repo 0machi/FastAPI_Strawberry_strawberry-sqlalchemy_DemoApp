@@ -1,12 +1,19 @@
+import pytest
 from fastapi.testclient import TestClient
-from httpx._models import Response
 
-from src.api.main import app
+from src.api.main import app, schema
 
 client = TestClient(app)
 
 
-def test_hello() -> None:
-    response: Response = client.get("/hello")
-    assert response.status_code == 200
-    assert response.json() == {"msg": "Hello World"}
+@pytest.mark.asyncio
+async def test_hello() -> None:
+    query = """
+        query {
+            hello
+        }
+    """
+
+    resp = await schema.execute(query=query)
+    assert resp.errors is None and resp.data is not None
+    assert resp.data["hello"] == "Hello World"
