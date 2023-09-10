@@ -40,6 +40,7 @@ pythonpath = "src"
 python = "^3.11"
 fastapi = "^0.103.1"
 uvicorn = {extras = ["standard"], version = "^0.23.2"}
+strawberry-graphql = {extras = ["fastapi"], version = "^0.205.0"}
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"
