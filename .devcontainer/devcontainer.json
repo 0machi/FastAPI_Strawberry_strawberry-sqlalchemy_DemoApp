@@ -38,6 +38,7 @@
 		"vscode": {
 			"extensions": [
 				"be5invis.toml",
+				"mikestead.dotenv",
 				"ms-python.flake8",
 				"ms-python.python",
 				"ms-python.mypy-type-checker",
