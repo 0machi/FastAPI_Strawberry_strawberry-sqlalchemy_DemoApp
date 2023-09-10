@@ -23,6 +23,7 @@ check_untyped_defs = true
 disallow_any_generics = true
 disallow_untyped_defs = true
 ignore_missing_imports = true
+plugins = "strawberry.ext.mypy_plugin"
 python_version = 3.11
 show_column_numbers = true
 show_error_codes = true
