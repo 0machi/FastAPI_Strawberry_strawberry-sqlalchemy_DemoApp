@@ -8,4 +8,7 @@
     - テストの前に、autoflake, black, isort, pyupgrade によるフォーマット、mypy による型チェックを実施します。
 
 ## モジュール追加
-docker compose run --entrypoint "poetry add hoge" demo-app
+- docker compose run --entrypoint "poetry add hoge" demo-app
+
+## GraghiQL
+- http://localhost:8000/graphql
