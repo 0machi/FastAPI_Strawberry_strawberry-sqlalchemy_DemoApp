@@ -66,15 +66,11 @@ def get_session(
 
 async def get_hoge(
     info: Info[dict[str, AsyncSession], RootValueType]
-) -> list[Country]:
+) -> list[_Country]:
     session = get_session(info)
     query = sql.select(_Country).where(_Country.country_id == 1)
     countries = await session.execute(query)
     country = countries.scalars().first()
     if country is None:
         return []
-    return [
-        Country(
-            country_id=country.country_id, country_name=country.country_name
-        )
-    ]
+    return [country]

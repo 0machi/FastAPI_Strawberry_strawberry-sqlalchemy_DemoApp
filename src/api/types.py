@@ -1,4 +1,9 @@
 import strawberry
+from strawberry_sqlalchemy_mapper import StrawberrySQLAlchemyMapper
+
+from src.database import models
+
+strawberry_sqlalchemy_mapper = StrawberrySQLAlchemyMapper()  # type: ignore
 
 
 @strawberry.type
@@ -34,3 +39,8 @@ class InternalServerError:
 @strawberry.type
 class Ok:
     msg: str
+
+
+@strawberry_sqlalchemy_mapper.type(models.Country)
+class Hoge:
+    pass
