@@ -4,6 +4,7 @@ from src.api.resolvers import (
     get_cities,
     get_countries,
     get_country_with_cities,
+    get_hoge,
 )
 from src.api.types import City, Country, CountryWithCities
 
@@ -15,6 +16,7 @@ class Query:
         return "Hello World"
 
     countries: list[Country] = strawberry.field(resolver=get_countries)
+    hoge: list[Country] = strawberry.field(resolver=get_hoge)
     cities: list[City] = strawberry.field(resolver=get_cities)
     country_with_cities: list[CountryWithCities] = strawberry.field(
         resolver=get_country_with_cities

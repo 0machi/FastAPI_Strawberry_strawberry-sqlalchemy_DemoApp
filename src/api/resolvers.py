@@ -1,4 +1,11 @@
+from typing import TypeVar
+
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.sql import expression as sql
+from strawberry.types import Info
+
 from src.api.types import City, Country, CountryWithCities
+from src.database.models import Country as _Country
 from src.libs.supabase.client import supabase_client
 
 
@@ -43,3 +50,31 @@ async def get_country_with_cities() -> list[CountryWithCities]:
         ]
     except Exception:
         return []
+
+
+RootValueType = TypeVar("RootValueType")
+
+
+def get_session(
+    info: Info[dict[str, AsyncSession], RootValueType]
+) -> AsyncSession:
+    session = info.context.get("session")
+    if session is None:
+        raise ValueError("Session not found in context.")
+    return session
+
+
+async def get_hoge(
+    info: Info[dict[str, AsyncSession], RootValueType]
+) -> list[Country]:
+    session = get_session(info)
+    query = sql.select(_Country).where(_Country.country_id == 1)
+    countries = await session.execute(query)
+    country = countries.scalars().first()
+    if country is None:
+        return []
+    return [
+        Country(
+            country_id=country.country_id, country_name=country.country_name
+        )
+    ]
