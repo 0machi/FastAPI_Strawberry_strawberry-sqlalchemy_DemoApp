@@ -44,6 +44,7 @@ uvicorn = {extras = ["standard"], version = "^0.23.2"}
 strawberry-graphql = {extras = ["fastapi"], version = "^0.205.0"}
 supabase = "^1.0.4"
 sqlalchemy = "^2.0.20"
+asyncpg = "^0.28.0"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"
