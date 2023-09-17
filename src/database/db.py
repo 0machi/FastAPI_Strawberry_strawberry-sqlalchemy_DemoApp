@@ -25,14 +25,14 @@ class Database:
 
     async def disconnect(self) -> None:
         if self.__engine is None:
-            raise AttributeError
+            raise ValueError("__engine not found.")
         await self.__engine.dispose()
 
     async def get_db(
         self,
     ) -> AsyncIterator[AsyncSession]:
         if self.__session is None:
-            raise AttributeError
+            raise ValueError("__session not found.")
         async with self.__session() as session:
             yield session
 
