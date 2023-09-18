@@ -19,11 +19,16 @@ class Mutations:
         country_name: str,
     ) -> AddCountryPayload:
         session = get_session(info)
-        country = Country(
-            country_id=country_id, country_name=country_name, cities=[]
+        new_country = await stmts.add_country(
+            session=session,
+            country=Country(
+                country_id=country_id, country_name=country_name, cities=[]
+            ),
         )
-        session.add(country)
-        await session.commit()
+        if new_country is None:
+            return AddCountryPayload(
+                country=None, severErrors=[ServerError(msg="Failed add_country.")]  # type: ignore
+            )
         added_country = await stmts.get_country_by_name(
             session=session, country_name=country_name
         )

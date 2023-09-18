@@ -33,6 +33,23 @@ async def get_country_by_name(
     return country
 
 
+async def add_country(
+    session: AsyncSession,
+    country: Country,
+) -> Row[tuple[int, str]] | None:
+    query = (
+        sql.insert(Country)
+        .values(
+            country_id=country.country_id, country_name=country.country_name
+        )
+        .returning(Country.country_id, Country.country_name)
+    )
+    result = await session.execute(query)
+    await session.commit()
+    added_country = result.first()
+    return added_country
+
+
 async def update_country(
     session: AsyncSession,
     old_country_name: str,
