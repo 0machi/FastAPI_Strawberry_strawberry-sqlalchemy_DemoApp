@@ -1,12 +1,15 @@
 import strawberry
 
-from src.api.resolvers import (
+from src.api.resolvers.queries import (
     get_cities,
     get_countries,
-    get_country_with_cities,
-    get_hoge,
+    get_country_by_name,
 )
-from src.api.types import City, Country, CountryWithCities
+from src.api.types import (
+    GetCitiesPayload,
+    GetCountriesPayload,
+    GetCountryPayload,
+)
 
 
 @strawberry.type
@@ -15,9 +18,8 @@ class Query:
     def hello(self) -> str:
         return "Hello World"
 
-    countries: list[Country] = strawberry.field(resolver=get_countries)
-    hoge: list[Country] = strawberry.field(resolver=get_hoge)
-    cities: list[City] = strawberry.field(resolver=get_cities)
-    country_with_cities: list[CountryWithCities] = strawberry.field(
-        resolver=get_country_with_cities
+    countries: GetCountriesPayload = strawberry.field(resolver=get_countries)
+    cities: GetCitiesPayload = strawberry.field(resolver=get_cities)
+    country_by_name: GetCountryPayload = strawberry.field(
+        resolver=get_country_by_name
     )
