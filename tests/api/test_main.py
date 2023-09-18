@@ -1,14 +1,10 @@
 import pytest
-from fastapi.testclient import TestClient
 
-from src.api.main import app
 from src.api.schema.schema import schema
-
-client = TestClient(app)
 
 
 @pytest.mark.asyncio
-async def test_hello() -> None:
+async def test_hello(setup_app: None) -> None:
     query = """
         query {
             hello
