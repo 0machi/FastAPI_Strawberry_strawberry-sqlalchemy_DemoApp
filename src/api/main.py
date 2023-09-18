@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from src.api.schema import graphql_app
+from src.api.schema.schema import graphql_app
 from src.database.db import db
 
 app = FastAPI()

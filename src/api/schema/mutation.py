@@ -2,7 +2,7 @@ import strawberry
 from strawberry.field_extensions import InputMutationExtension
 
 from src.api.resolvers.mutations import Mutations
-from src.api.types import (
+from src.api.schema.types import (
     AddCountryPayload,
     DeleteCountryPayload,
     UpdateCountryPayload,

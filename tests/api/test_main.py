@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from src.api.main import app
-from src.api.schema import schema
+from src.api.schema.schema import schema
 
 client = TestClient(app)
 

@@ -3,10 +3,10 @@ from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from strawberry.fastapi import GraphQLRouter
 
-from src.api.context import ContextType
-from src.api.mutation import Mutation
-from src.api.query import Query
-from src.api.types import strawberry_sqlalchemy_mapper
+from src.api.resolvers.context import ContextType
+from src.api.schema.mutation import Mutation
+from src.api.schema.query import Query
+from src.api.schema.types import strawberry_sqlalchemy_mapper
 from src.database.db import db
 
 

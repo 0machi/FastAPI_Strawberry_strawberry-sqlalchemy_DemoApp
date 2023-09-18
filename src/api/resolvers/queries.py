@@ -1,8 +1,8 @@
 from strawberry.types import Info
 
-from src.api.context import ContextType, RootValueType, get_session
 from src.api.resolvers import stmts
-from src.api.types import (
+from src.api.resolvers.context import ContextType, RootValueType, get_session
+from src.api.schema.types import (
     GetCitiesPayload,
     GetCountriesPayload,
     GetCountryPayload,
