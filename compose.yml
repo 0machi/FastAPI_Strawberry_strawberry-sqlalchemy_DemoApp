@@ -12,6 +12,8 @@ services:
       - dev.env
     depends_on:
       - postgresql
+    tty: true
+    stdin_open: true
   postgresql:
     image: postgres:16
     volumes:
