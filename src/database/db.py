@@ -7,34 +7,35 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from src.database.config import db_config
+from src.database.config import Config, db_config
 
 
 class Database:
-    def __init__(self) -> None:
-        self.__session: Optional[async_sessionmaker[AsyncSession]] = None
-        self.__engine: Optional[AsyncEngine] = None
+    def __init__(self, db_config: Config) -> None:
+        self.session: Optional[async_sessionmaker[AsyncSession]] = None
+        self.engine: Optional[AsyncEngine] = None
+        self.db_config: Config = db_config
 
     def connect(self) -> None:
-        self.__engine = create_async_engine(url=db_config.dsn)
+        self.engine = create_async_engine(url=self.db_config.dsn)
 
-        self.__session = async_sessionmaker(
-            bind=self.__engine,
+        self.session = async_sessionmaker(
+            bind=self.engine,
             autocommit=False,
         )
 
     async def disconnect(self) -> None:
-        if self.__engine is None:
-            raise ValueError("__engine not found.")
-        await self.__engine.dispose()
+        if self.engine is None:
+            raise ValueError("engine not found.")
+        await self.engine.dispose()
 
-    async def get_db(
+    async def get_db_session(
         self,
     ) -> AsyncIterator[AsyncSession]:
-        if self.__session is None:
-            raise ValueError("__session not found.")
-        async with self.__session() as session:
+        if self.session is None:
+            raise ValueError("session not found.")
+        async with self.session() as session:
             yield session
 
 
-db = Database()
+db = Database(db_config=db_config)

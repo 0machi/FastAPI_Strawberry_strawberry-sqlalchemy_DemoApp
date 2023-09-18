@@ -11,7 +11,7 @@ from src.database.db import db
 
 
 def get_context(
-    session: AsyncSession = Depends(db.get_db),
+    session: AsyncSession = Depends(db.get_db_session),
 ) -> ContextType:
     return {"session": session}
 
