@@ -1,12 +1,18 @@
 from sqlalchemy import ForeignKey, Integer, String
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    MappedAsDataclass,
+    mapped_column,
+    relationship,
+)
 
 
 class Base(DeclarativeBase):
     pass
 
 
-class Country(Base):
+class Country(MappedAsDataclass, Base):
     __tablename__ = "countries"
 
     country_id: Mapped[int] = mapped_column(primary_key=True, index=True)
@@ -15,7 +21,7 @@ class Country(Base):
     cities: Mapped[list["City"]] = relationship(backref="cities")
 
 
-class City(Base):
+class City(MappedAsDataclass, Base):
     __tablename__ = "cities"
 
     city_id: Mapped[int] = mapped_column(primary_key=True, index=True)
