@@ -33,7 +33,7 @@ warn_unreachable = true
 warn_unused_configs = true
 
 [tool.pytest.ini_options]
-addopts = "--strict-markers --strict-config -ra -vv --cov=src --cov-report=html"
+addopts = "--strict-markers --strict-config -ra -vv -s --cov=src --cov-report=html"
 testpaths = "tests"
 pythonpath = "src"
 
