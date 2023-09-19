@@ -10,3 +10,17 @@ services:
       - 8000:8000
     env_file:
       - dev.env
+    depends_on:
+      - postgresql
+    tty: true
+    stdin_open: true
+  postgresql:
+    image: postgres:16
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file:
+      - dev.env
+volumes:
+  postgresql-data:
