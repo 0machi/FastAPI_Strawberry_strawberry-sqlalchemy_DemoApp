@@ -1,7 +1,7 @@
 import pytest
 from httpx import AsyncClient
 
-from src.database.db import DatabaseSessionManager
+from src.database.session_manager import DatabaseSessionManager
 from tests.api.schema.query import (
     cities_query,
     countries_query,

@@ -6,7 +6,7 @@ from src.api.resolvers.stmts import (
     get_countries,
     get_country_by_name,
 )
-from src.database.db import DatabaseSessionManager
+from src.database.session_manager import DatabaseSessionManager
 from src.database.models import Country
 from tests.seed import cities as expected_cities
 from tests.seed import countries as expected_coutries
