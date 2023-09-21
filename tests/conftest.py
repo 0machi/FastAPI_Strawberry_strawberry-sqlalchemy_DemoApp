@@ -11,7 +11,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.api.main import init_app
 from src.database.config import db_config
-from src.database.session_manager import DatabaseSessionManager, get_db, sessionmanager
+from src.database.session_manager import (
+    DatabaseSessionManager,
+    get_db,
+    sessionmanager,
+)
 
 
 @pytest.fixture()
