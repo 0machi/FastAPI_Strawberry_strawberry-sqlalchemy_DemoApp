@@ -1,5 +1,3 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from src.database.models import City, Country
 
 los_angeles = City(
@@ -18,10 +16,3 @@ philippines = Country(country_id=2, country_name="Philippines", cities=[cebu])
 
 countries: list[Country] = [us, philippines]
 cities: list[City] = [los_angeles, santa_monica, cebu]
-
-
-def setup_db(session: AsyncSession) -> None:
-    for country in countries:
-        session.add(country)
-    for city in cities:
-        session.add(city)
