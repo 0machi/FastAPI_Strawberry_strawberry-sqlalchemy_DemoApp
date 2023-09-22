@@ -8,10 +8,11 @@ class Config:
     user: str
     password: str
     host: str
+    port: str = "5432"
     dsn: str = field(init=False)
 
     def __post_init__(self) -> None:
-        self.dsn = f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:5432/{self.db}"
+        self.dsn = f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.db}"
 
 
 try:

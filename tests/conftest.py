@@ -42,7 +42,7 @@ async def session() -> AsyncIterator[DatabaseSessionManager]:
     with DatabaseJanitor(
         user=db_config.user,
         host=db_config.host,
-        port="5432",
+        port=db_config.port,
         dbname="test_db",
         version="15.3",
         password=db_config.password,
