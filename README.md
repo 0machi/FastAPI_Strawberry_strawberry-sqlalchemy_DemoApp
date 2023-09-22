@@ -5,7 +5,8 @@ flowchart LR
     A[Browser] -->|GrapqhQL| B(FastAPI)
     B --> C[Strawberry]
     C --> D[strawberry-sqlalchemy]
-    D --> E[(DB)]
+    D --> E[SQLAlchemy]
+    E --> F[(PostgreSQL)]
 ```
 
 
