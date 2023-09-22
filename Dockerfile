@@ -35,3 +35,4 @@ WORKDIR /app
 FROM builder-base as prod
 WORKDIR /app
 COPY --from=builder-base /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+ENTRYPOINT ["uvicorn", "src.api.app:server", "--host", "0.0.0.0"]
