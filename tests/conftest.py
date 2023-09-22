@@ -16,6 +16,7 @@ from src.database.session_manager import (
     get_db,
     sessionmanager,
 )
+from tests.seed import init_stmts
 
 
 @pytest.fixture()
@@ -42,7 +43,7 @@ async def session() -> AsyncIterator[DatabaseSessionManager]:
     with DatabaseJanitor(
         user=db_config.user,
         host=db_config.host,
-        port="5432",
+        port=db_config.port,
         dbname="test_db",
         version="15.3",
         password=db_config.password,
@@ -52,15 +53,8 @@ async def session() -> AsyncIterator[DatabaseSessionManager]:
             await sessionmanager.drop_all(connection)
             await sessionmanager.create_all(connection)
         conn = await asyncpg.connect(db_config.dsn.replace("+asyncpg", ""))
-        await conn.execute("INSERT INTO countries VALUES(1, 'US');")
-        await conn.execute(
-            "INSERT INTO cities VALUES(1, 1, 'Los Angeles', 3849000);"
-        )
-        await conn.execute(
-            "INSERT INTO cities VALUES(2, 1, 'Santa Monica', 91000);"
-        )
-        await conn.execute("INSERT INTO countries VALUES(2, 'Philippines');")
-        await conn.execute("INSERT INTO cities VALUES(3, 2, 'Cebu', 3000000);")
+        for stmt in init_stmts:
+            await conn.execute(stmt)
         await conn.close()
         yield sessionmanager
         await sessionmanager.close()

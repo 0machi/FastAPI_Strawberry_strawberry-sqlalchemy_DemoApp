@@ -70,7 +70,7 @@ class Mutations:
                 ],
             )
         return UpdateCountryPayload(
-            country=Country(**updated_country._asdict()),  # type: ignore
+            country=Country(**updated_country._asdict() | {"cities": []}),  # type: ignore
             severErrors=[],
         )
 
@@ -95,6 +95,6 @@ class Mutations:
                 severErrors=[ServerError(msg=f"{country_name=} not found.")],
             )
         return DeleteCountryPayload(
-            country=Country(**deleted_country._asdict()),  # type: ignore
+            country=Country(**deleted_country._asdict() | {"cities": []}),  # type: ignore
             severErrors=[],
         )
