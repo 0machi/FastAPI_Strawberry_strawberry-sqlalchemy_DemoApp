@@ -31,14 +31,7 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 WORKDIR $PYSETUP_PATH
 RUN poetry install --no-root
 WORKDIR /app
-RUN groupadd -g 1000 app_user && \
-    useradd -m -s /bin/bash -u 1000 -g 1000 app_user && \
-    chown -R app_user:app_user /app && \
-    chown -R app_user:app_user /usr/local/lib/python3.11/site-packages
-USER app_user
-# ENTRYPOINT ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--reload"]
 
 FROM builder-base as prod
 WORKDIR /app
 COPY --from=builder-base /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-# ENTRYPOINT ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--reload"]
