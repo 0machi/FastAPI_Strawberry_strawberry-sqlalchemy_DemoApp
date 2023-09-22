@@ -2,10 +2,10 @@
 ## System architecture
 ```mermaid
 flowchart LR
-    A[fa:fa-desktop] -->|GrapqhQL| B(FastAPI)
+    A[Browser] -->|GrapqhQL| B(FastAPI)
     B --> C[Strawberry]
     C --> D[strawberry-sqlalchemy]
-    D --> E[(Database)]
+    D --> E[(DB)]
 ```
 
 
