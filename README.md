@@ -1,4 +1,14 @@
 # Demo App using [FastAPI](https://fastapi.tiangolo.com/), GraphQL([Strawberry](https://strawberry.rocks/), [strawberry-sqlalchemy](https://github.com/strawberry-graphql/strawberry-sqlalchemy)), Docker
+## System architecture
+```mermaid
+flowchart LR
+    A[fa:fa-desktop] -->|GrapqhQL| B(FastAPI)
+    B --> C[Strawberry]
+    C --> D[strawberry-sqlalchemy]
+    D --> E[fa:fa-database]
+```
+
+
 ## How to run
 1. Run Docker
 - $ docker compose build --no-cache
