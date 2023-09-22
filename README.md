@@ -5,7 +5,7 @@ flowchart LR
     A[fa:fa-desktop] -->|GrapqhQL| B(FastAPI)
     B --> C[Strawberry]
     C --> D[strawberry-sqlalchemy]
-    D --> E[fa:fa-database]
+    D --> E[(Database)]
 ```
 
 
