@@ -6,6 +6,7 @@ from src.api.resolvers.stmts import (
     get_cities,
     get_countries,
     get_country_by_name,
+    update_country,
 )
 from src.database.models import Country
 from src.database.session_manager import DatabaseSessionManager
@@ -46,6 +47,21 @@ async def test_add_country(session: DatabaseSessionManager) -> None:
             country=Country(
                 country_id=country_id, country_name=country_name, cities=[]
             ),
+        )
+        assert actual == expected
+
+
+@pytest.mark.asyncio
+async def test_update_country(session: DatabaseSessionManager) -> None:
+    async with session.session() as s:
+        country_id = 3
+        old_country_name = "Japan"
+        new_country_name = "JP"
+        expected = (country_id, new_country_name)
+        actual = await update_country(
+            session=s,
+            old_country_name=old_country_name,
+            new_country_name=new_country_name,
         )
         assert actual == expected
 
