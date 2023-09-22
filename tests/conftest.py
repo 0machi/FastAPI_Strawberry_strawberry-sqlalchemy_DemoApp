@@ -9,7 +9,7 @@ from httpx import AsyncClient
 from pytest_postgresql.janitor import DatabaseJanitor
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.api.main import init_app
+from src.api.app import init_app
 from src.database.config import db_config
 from src.database.session_manager import (
     DatabaseSessionManager,
