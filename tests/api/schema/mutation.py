@@ -51,3 +51,30 @@ def update_country_mutation() -> (
         }
     }
     return mutation, excepted
+
+
+def delete_country_mutation() -> (
+    tuple[str, dict[str, dict[str, dict[str, Any]]]]
+):
+    mutation = """
+    mutation {
+        deleteCountry(input : {countryName: "Japan"}) {
+            country {
+                countryId
+                countryName
+            }
+            severErrors {
+                msg
+            }
+        }
+    }
+    """
+    excepted = {
+        "data": {
+            "deleteCountry": {
+                "country": {"countryId": 3, "countryName": "Japan"},
+                "severErrors": [],
+            }
+        }
+    }
+    return mutation, excepted
