@@ -1,14 +1,16 @@
-# FastAPI と Strawberry を Docker で動かすための環境を用意してみる
-## 起動方法
+# Demo App using [FastAPI](https://fastapi.tiangolo.com/), GraphQL([Strawberry](https://strawberry.rocks/), [strawberry-sqlalchemy](https://github.com/strawberry-graphql/strawberry-sqlalchemy)), Docker
+## How to run
+1. Run Docker
 - $ docker compose build --no-cache
 - $ docker compose up
-
-## テスト
+- $ docker compose start
+2. DB migration
 - $ task test
-    - テストの前に、autoflake, black, isort, pyupgrade によるフォーマット、mypy による型チェックを実施します。
-
-## モジュール追加
-- docker compose run --entrypoint "poetry add hoge" demo-app
-
-## GraghiQL
+  - Before testing, DB migration, formatting by autoflake, black, isort, pyupgrade, and type checking by mypy are performed by [taskipy](https://github.com/taskipy/taskipy).
+3. Run FastAPI
+- $ uvicorn src.api.app:server --host 0.0.0.0 --reload
+4. Access to GraghiQL
 - http://localhost:8000/graphql
+
+## Testing
+- $ task test
