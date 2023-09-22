@@ -31,9 +31,7 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 WORKDIR $PYSETUP_PATH
 RUN poetry install --no-root
 WORKDIR /app
-# ENTRYPOINT ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--reload"]
 
 FROM builder-base as prod
 WORKDIR /app
 COPY --from=builder-base /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-# ENTRYPOINT ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--reload"]

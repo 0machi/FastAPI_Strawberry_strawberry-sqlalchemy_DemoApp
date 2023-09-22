@@ -7,11 +7,11 @@ from src.api.resolvers.context import ContextType
 from src.api.schema.mutation import Mutation
 from src.api.schema.query import Query
 from src.api.schema.types import strawberry_sqlalchemy_mapper
-from src.database.db import db
+from src.database.session_manager import get_db
 
 
 def get_context(
-    session: AsyncSession = Depends(db.get_db_session),
+    session: AsyncSession = Depends(get_db),
 ) -> ContextType:
     return {"session": session}
 

@@ -1,6 +1,7 @@
 import pytest
 from httpx import AsyncClient
 
+from src.database.session_manager import DatabaseSessionManager
 from tests.api.schema.query import (
     cities_query,
     countries_query,
@@ -9,7 +10,9 @@ from tests.api.schema.query import (
 
 
 @pytest.mark.asyncio
-async def test_countries(init_db: None, async_client: AsyncClient) -> None:
+async def test_countries(
+    async_client: AsyncClient, session: DatabaseSessionManager
+) -> None:
     query, expected = countries_query()
     resp = await async_client.post(
         "/graphql",
@@ -23,7 +26,9 @@ async def test_countries(init_db: None, async_client: AsyncClient) -> None:
 
 
 @pytest.mark.asyncio
-async def test_cities(init_db: None, async_client: AsyncClient) -> None:
+async def test_cities(
+    async_client: AsyncClient, session: DatabaseSessionManager
+) -> None:
     query, expected = cities_query()
     resp = await async_client.post(
         "/graphql",
@@ -38,7 +43,7 @@ async def test_cities(init_db: None, async_client: AsyncClient) -> None:
 
 @pytest.mark.asyncio
 async def test_country_by_name(
-    init_db: None, async_client: AsyncClient
+    async_client: AsyncClient, session: DatabaseSessionManager
 ) -> None:
     query, expected = country_by_name_query()
     resp = await async_client.post(
