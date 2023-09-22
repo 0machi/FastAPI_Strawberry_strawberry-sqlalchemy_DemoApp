@@ -2,6 +2,7 @@ import pytest
 
 from src.api.resolvers.stmts import (
     add_country,
+    delete_country,
     get_cities,
     get_countries,
     get_country_by_name,
@@ -37,9 +38,23 @@ async def test_get_country_by_name(session: DatabaseSessionManager) -> None:
 @pytest.mark.asyncio
 async def test_add_country(session: DatabaseSessionManager) -> None:
     async with session.session() as s:
-        expected = (3, "Japan")
+        country_id = 4
+        country_name = "Switzerland"
+        expected = (country_id, country_name)
         actual = await add_country(
             session=s,
-            country=Country(country_id=3, country_name="Japan", cities=[]),
+            country=Country(
+                country_id=country_id, country_name=country_name, cities=[]
+            ),
         )
+        assert actual == expected
+
+
+@pytest.mark.asyncio
+async def test_delete_country(session: DatabaseSessionManager) -> None:
+    async with session.session() as s:
+        country_id = 3
+        country_name = "Japan"
+        expected = (country_id, country_name)
+        actual = await delete_country(session=s, country_name=country_name)
         assert actual == expected

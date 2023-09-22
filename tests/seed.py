@@ -13,6 +13,8 @@ us = Country(
 cebu = City(city_id=3, country_id=2, city_name="Cebu", population=3000000)
 philippines = Country(country_id=2, country_name="Philippines", cities=[cebu])
 
+japan = Country(country_id=3, country_name="Japan", cities=[])
 
-countries: list[Country] = [us, philippines]
+
+countries: list[Country] = [us, philippines, japan]
 cities: list[City] = [los_angeles, santa_monica, cebu]

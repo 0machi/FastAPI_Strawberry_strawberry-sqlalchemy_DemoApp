@@ -61,6 +61,7 @@ async def session() -> AsyncIterator[DatabaseSessionManager]:
         )
         await conn.execute("INSERT INTO countries VALUES(2, 'Philippines');")
         await conn.execute("INSERT INTO cities VALUES(3, 2, 'Cebu', 3000000);")
+        await conn.execute("INSERT INTO countries VALUES(3, 'Japan');")
         await conn.close()
         yield sessionmanager
         await sessionmanager.close()

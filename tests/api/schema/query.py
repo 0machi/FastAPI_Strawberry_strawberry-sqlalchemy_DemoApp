@@ -69,6 +69,11 @@ def countries_query() -> tuple[str, dict[str, dict[str, dict[str, Any]]]]:
                             ]
                         },
                     },
+                    {
+                        "countryId": 3,
+                        "countryName": "Japan",
+                        "cities": {"edges": []},
+                    },
                 ],
                 "severErrors": [],
             }
