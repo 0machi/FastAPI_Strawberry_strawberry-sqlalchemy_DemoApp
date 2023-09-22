@@ -24,3 +24,30 @@ def add_country_mutation() -> tuple[str, dict[str, dict[str, dict[str, Any]]]]:
         }
     }
     return mutation, excepted
+
+
+def update_country_mutation() -> (
+    tuple[str, dict[str, dict[str, dict[str, Any]]]]
+):
+    mutation = """
+    mutation {
+        updateCountry(input : { oldCountryName: "Japan", newCountryName: "JP"}) {
+            country {
+                countryId
+                countryName
+            }
+            severErrors {
+                msg
+            }
+        }
+    }
+    """
+    excepted = {
+        "data": {
+            "updateCountry": {
+                "country": {"countryId": 3, "countryName": "JP"},
+                "severErrors": [],
+            }
+        }
+    }
+    return mutation, excepted
