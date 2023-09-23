@@ -10,7 +10,7 @@ from src.api.schema.types import (
 
 
 @strawberry.type
-class Mutation:
+class CountryMutation:
     add_country: AddCountryPayload = strawberry.mutation(
         resolver=Mutations.add_country, extensions=[InputMutationExtension()]
     )
