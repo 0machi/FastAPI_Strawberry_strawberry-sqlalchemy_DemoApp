@@ -1,7 +1,7 @@
 import strawberry
 from strawberry.field_extensions import InputMutationExtension
 
-from src.api.resolvers.mutations import Mutations
+from src.api.resolvers.mutations.country_resolver import CountryResolver
 from src.api.schema.types import (
     AddCountryPayload,
     DeleteCountryPayload,
@@ -10,15 +10,16 @@ from src.api.schema.types import (
 
 
 @strawberry.type
-class Mutation:
+class CountryMutation:
     add_country: AddCountryPayload = strawberry.mutation(
-        resolver=Mutations.add_country, extensions=[InputMutationExtension()]
+        resolver=CountryResolver.add_country,
+        extensions=[InputMutationExtension()],
     )
     update_country: UpdateCountryPayload = strawberry.mutation(
-        resolver=Mutations.update_country,
+        resolver=CountryResolver.update_country,
         extensions=[InputMutationExtension()],
     )
     delete_country: DeleteCountryPayload = strawberry.mutation(
-        resolver=Mutations.delete_country,
+        resolver=CountryResolver.delete_country,
         extensions=[InputMutationExtension()],
     )
