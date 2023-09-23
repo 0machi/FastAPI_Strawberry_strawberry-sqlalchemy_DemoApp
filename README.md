@@ -25,3 +25,6 @@ flowchart LR
 
 ## Testing
 - $ task test
+
+## Render
+- https://fastapi-strawberry-strawberry-sqlalchemy.onrender.com/graphql
