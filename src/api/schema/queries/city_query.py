@@ -1,6 +1,6 @@
 import strawberry
 
-from src.api.resolvers.queries import get_cities
+from src.api.resolvers.queries.city_resolver import get_cities
 from src.api.schema.types import GetCitiesPayload
 
 

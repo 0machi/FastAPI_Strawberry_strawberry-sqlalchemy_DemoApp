@@ -2,11 +2,7 @@ from strawberry.types import Info
 
 from src.api.resolvers import stmts
 from src.api.resolvers.context import ContextType, RootValueType, get_session
-from src.api.schema.types import (
-    GetCitiesPayload,
-    GetCountriesPayload,
-    GetCountryPayload,
-)
+from src.api.schema.types import GetCountriesPayload, GetCountryPayload
 
 
 async def get_countries(
@@ -17,14 +13,6 @@ async def get_countries(
     return GetCountriesPayload(
         countries=countries, severErrors=[]  # type: ignore
     )
-
-
-async def get_cities(
-    info: Info[ContextType, RootValueType]
-) -> GetCitiesPayload:
-    session = get_session(info)
-    cities = await stmts.get_cities(session=session)
-    return GetCitiesPayload(cities=cities, severErrors=[])  # type: ignore
 
 
 async def get_country_by_name(

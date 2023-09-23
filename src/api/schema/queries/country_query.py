@@ -1,6 +1,9 @@
 import strawberry
 
-from src.api.resolvers.queries import get_countries, get_country_by_name
+from src.api.resolvers.queries.country_resolver import (
+    get_countries,
+    get_country_by_name,
+)
 from src.api.schema.types import GetCountriesPayload, GetCountryPayload
 
 
