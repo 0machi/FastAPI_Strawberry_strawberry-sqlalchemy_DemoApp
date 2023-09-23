@@ -2,7 +2,7 @@ import pytest
 from httpx import AsyncClient
 
 from src.database.session_manager import DatabaseSessionManager
-from tests.api.schema.mutation import (
+from tests.api.schema.mutations.coutry_mutation import (
     add_country_mutation,
     delete_country_mutation,
     update_country_mutation,
