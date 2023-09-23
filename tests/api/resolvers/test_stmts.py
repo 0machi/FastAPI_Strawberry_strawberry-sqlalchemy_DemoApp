@@ -1,9 +1,9 @@
 import pytest
 
-from src.api.resolvers.stmts import (
+from src.api.resolvers.stmts.city_stmt import get_cities
+from src.api.resolvers.stmts.country_stmt import (
     add_country,
     delete_country,
-    get_cities,
     get_countries,
     get_country_by_name,
     update_country,

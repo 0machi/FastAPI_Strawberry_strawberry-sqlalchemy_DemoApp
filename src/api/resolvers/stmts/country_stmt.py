@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 from sqlalchemy.sql import expression as sql
 
-from src.database.models import City, Country
+from src.database.models import Country
 
 
 async def get_countries(session: AsyncSession) -> list[Country]:
@@ -11,13 +11,6 @@ async def get_countries(session: AsyncSession) -> list[Country]:
     result = await session.execute(query)
     countries = result.scalars().all()
     return list(countries)
-
-
-async def get_cities(session: AsyncSession) -> list[City]:
-    query = sql.select(City)
-    result = await session.execute(query)
-    cities = result.scalars().all()
-    return list(cities)
 
 
 async def get_country_by_name(
