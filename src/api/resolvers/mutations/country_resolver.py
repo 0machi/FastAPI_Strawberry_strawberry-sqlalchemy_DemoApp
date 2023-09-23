@@ -11,7 +11,7 @@ from src.api.schema.types import (
 from src.database.models import Country
 
 
-class Mutations:
+class CountryResolver:
     async def add_country(
         self,
         info: Info[ContextType, RootValueType],
