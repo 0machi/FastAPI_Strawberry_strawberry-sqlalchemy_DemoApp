@@ -10,13 +10,14 @@ from pytest_postgresql.janitor import DatabaseJanitor
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.api.app import init_app
+from src.api.auth.token import create_access_token
 from src.database.config import db_config
 from src.database.session_manager import (
     DatabaseSessionManager,
     get_db,
     sessionmanager,
 )
-from tests.seed import init_stmts
+from tests.seed import admin, init_stmts
 
 
 @pytest.fixture()
@@ -58,3 +59,9 @@ async def session() -> AsyncIterator[DatabaseSessionManager]:
         await conn.close()
         yield sessionmanager
         await sessionmanager.close()
+
+
+@pytest.fixture()
+def token() -> str:
+    token = create_access_token(data={"sub": str(admin.id)})
+    return token
