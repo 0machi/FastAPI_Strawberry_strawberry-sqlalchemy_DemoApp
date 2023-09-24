@@ -1,7 +1,7 @@
 import os
 from datetime import datetime, timedelta
 
-from jose import jwt
+from jose import JWTError, jwt
 
 try:
     JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
@@ -18,7 +18,11 @@ def create_access_token(data: dict[str, str | datetime]) -> str:
     return str(jwt.encode(claims=data, key=JWT_SECRET_KEY, algorithm="HS256"))
 
 
-def get_access_token_data(token: str) -> dict[str, str | datetime]:
-    return dict(
-        jwt.decode(token=token, key=JWT_SECRET_KEY, algorithms=["HS256"])
-    )
+def get_access_token_data(token: str) -> dict[str, str]:
+    try:
+        access_token = jwt.decode(
+            token=token, key=JWT_SECRET_KEY, algorithms=["HS256"]
+        )
+    except JWTError:
+        raise Exception("Could not validate credentials.")
+    return dict(access_token)
