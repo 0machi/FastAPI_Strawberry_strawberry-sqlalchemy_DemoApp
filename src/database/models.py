@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import (
     DeclarativeBase,
@@ -28,3 +30,14 @@ class City(MappedAsDataclass, Base):
     country_id: Mapped[int] = mapped_column(ForeignKey("countries.country_id"))
     city_name: Mapped[str] = mapped_column(String(100), nullable=False)
     population: Mapped[int] = mapped_column(Integer, nullable=True)
+
+
+class Users(MappedAsDataclass, Base):
+    __tablename__ = "users"
+    __table_args__ = {"schema": "auth"}
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, index=True)
+    email: Mapped[str] = mapped_column(String(255), nullable=False)
+    encrypted_password: Mapped[str] = mapped_column(
+        String(255), nullable=False
+    )
