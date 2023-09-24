@@ -44,7 +44,8 @@
 				"ms-python.mypy-type-checker",
 				"ms-python.vscode-pylance",
 				"ms-azuretools.vscode-docker",
-				"ryanluker.vscode-coverage-gutters"
+				"ryanluker.vscode-coverage-gutters",
+				"GitHub.copilot"
 			]
 		}
 	}
