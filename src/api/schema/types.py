@@ -24,6 +24,13 @@ class ServerError:
 
 
 @strawberry.type
+class LoginPayload:
+    access_token: Optional[str]
+    token_type: Optional[str]
+    severErrors: list[ServerError]
+
+
+@strawberry.type
 class GetCountriesPayload:
     countries: Optional[list[Country]]
     severErrors: list[ServerError]

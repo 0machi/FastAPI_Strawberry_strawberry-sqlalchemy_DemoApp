@@ -46,6 +46,8 @@ supabase = "^1.0.4"
 sqlalchemy = "^2.0.20"
 asyncpg = "^0.28.0"
 strawberry-sqlalchemy-mapper = "^0.2.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"
