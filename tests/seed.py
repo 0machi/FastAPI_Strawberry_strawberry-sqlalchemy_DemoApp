@@ -1,4 +1,6 @@
-from src.database.models import City, Country
+import uuid
+
+from src.database.models import City, Country, User
 
 los_angeles = City(
     city_id=1, country_id=1, city_name="Los Angeles", population=3849000
@@ -19,7 +21,14 @@ japan = Country(country_id=3, country_name="Japan", cities=[])
 countries: list[Country] = [us, philippines, japan]
 cities: list[City] = [los_angeles, santa_monica, cebu]
 
+admin = User(
+    id=uuid.UUID("fceef692-010b-480f-899c-5a6e8bab23a7"),
+    email="admin@gmail.com",
+    encrypted_password="$2a$10$Vr1WpWREGF/3xtq01HotUecfuS8AGK4LT7R6RlCtiqbk9QkRzwYxi",
+)
+
 init_stmts: list[str] = [
+    f"INSERT INTO auth.users VALUES('{admin.id}', '{admin.email}', '{admin.encrypted_password}');",
     f"INSERT INTO countries VALUES({us.country_id}, '{us.country_name}');",
     f"INSERT INTO cities VALUES({los_angeles.city_id}, {los_angeles.country_id}, '{los_angeles.city_name}', {los_angeles.population});",
     f"INSERT INTO cities VALUES({santa_monica.city_id}, {santa_monica.country_id}, '{santa_monica.city_name}', {santa_monica.population});",

@@ -32,7 +32,7 @@ class City(MappedAsDataclass, Base):
     population: Mapped[int] = mapped_column(Integer, nullable=True)
 
 
-class Users(MappedAsDataclass, Base):
+class User(MappedAsDataclass, Base):
     __tablename__ = "users"
     __table_args__ = {"schema": "auth"}
 
