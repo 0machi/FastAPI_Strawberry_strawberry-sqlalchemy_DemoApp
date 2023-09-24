@@ -1,16 +1,41 @@
 # Demo App using [FastAPI](https://fastapi.tiangolo.com/), GraphQL([Strawberry](https://strawberry.rocks/), [strawberry-sqlalchemy](https://github.com/strawberry-graphql/strawberry-sqlalchemy)), Docker
-## System architecture
+## System Architecture
+### dev
 ```mermaid
 flowchart LR
     A[Browser] -->|GrapqhQL| B(FastAPI)
+subgraph Docker
+    services.demo-app
+    services.postgresql
+end
+subgraph services.demo-app
     B --> C[Strawberry]
     C --> D[strawberry-sqlalchemy]
     D --> E[SQLAlchemy]
+end
+subgraph services.postgresql
     E --> F[(PostgreSQL)]
+end
 ```
 
+### prod
+```mermaid
+flowchart LR
+    A[Browser] -->|GrapqhQL| B(FastAPI)
+subgraph Render
+    DockerFile
+end
+subgraph DockerFile
+    B --> C[Strawberry]
+    C --> D[strawberry-sqlalchemy]
+    D --> E[SQLAlchemy]
+end
+subgraph Supabase
+    E --> F[(PostgreSQL)]
+end
+```
 
-## How to run
+## How to Run
 1. Run Docker
 - $ docker compose build --no-cache
 - $ docker compose up
