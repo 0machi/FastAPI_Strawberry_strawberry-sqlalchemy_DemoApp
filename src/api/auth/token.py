@@ -18,7 +18,7 @@ def create_access_token(data: dict[str, str | datetime]) -> str:
     return str(jwt.encode(claims=data, key=JWT_SECRET_KEY, algorithm="HS256"))
 
 
-def get_access_token_data(token: str) -> dict[str, str]:
+def get_access_token(token: str) -> dict[str, str]:
     try:
         access_token = jwt.decode(
             token=token, key=JWT_SECRET_KEY, algorithms=["HS256"]
