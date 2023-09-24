@@ -1,4 +1,4 @@
-import uuid
+from uuid import UUID
 
 from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import (
@@ -36,7 +36,7 @@ class User(MappedAsDataclass, Base):
     __tablename__ = "users"
     __table_args__ = {"schema": "auth"}
 
-    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, index=True)
+    id: Mapped[UUID] = mapped_column(primary_key=True, index=True)
     email: Mapped[str] = mapped_column(String(255), nullable=False)
     encrypted_password: Mapped[str] = mapped_column(
         String(255), nullable=False

@@ -1,4 +1,4 @@
-import uuid
+from uuid import UUID
 
 from src.database.models import City, Country, User
 
@@ -22,7 +22,7 @@ countries: list[Country] = [us, philippines, japan]
 cities: list[City] = [los_angeles, santa_monica, cebu]
 
 admin = User(
-    id=uuid.UUID("fceef692-010b-480f-899c-5a6e8bab23a7"),
+    id=UUID("fceef692-010b-480f-899c-5a6e8bab23a7"),
     email="admin@gmail.com",
     encrypted_password="$2a$10$Vr1WpWREGF/3xtq01HotUecfuS8AGK4LT7R6RlCtiqbk9QkRzwYxi",
 )
