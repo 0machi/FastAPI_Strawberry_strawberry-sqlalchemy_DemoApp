@@ -1,6 +1,12 @@
 from strawberry.types import Info
 
-from src.api.resolvers.context import ContextType, RootValueType, get_session
+from src.api.auth.user_authenticator import authenticate_user
+from src.api.resolvers.context import (
+    ContextType,
+    RootValueType,
+    get_session,
+    get_token,
+)
 from src.api.resolvers.stmts import country_stmt
 from src.api.schema.types import (
     AddCountryPayload,
@@ -18,7 +24,9 @@ class CountryResolver:
         country_id: int,
         country_name: str,
     ) -> AddCountryPayload:
+        token = get_token(info)
         session = get_session(info)
+        user = await authenticate_user(session=session, token=token)
         new_country = await country_stmt.add_country(
             session=session,
             country=Country(
@@ -46,7 +54,9 @@ class CountryResolver:
         old_country_name: str,
         new_country_name: str,
     ) -> UpdateCountryPayload:
+        token = get_token(info)
         session = get_session(info)
+        user = await authenticate_user(session=session, token=token)
         country = await country_stmt.get_country_by_name(
             session=session, country_name=old_country_name
         )
@@ -77,7 +87,9 @@ class CountryResolver:
     async def delete_country(
         self, info: Info[ContextType, RootValueType], country_name: str
     ) -> DeleteCountryPayload:
+        token = get_token(info)
         session = get_session(info)
+        user = await authenticate_user(session=session, token=token)
         country = await country_stmt.get_country_by_name(
             session=session, country_name=country_name
         )

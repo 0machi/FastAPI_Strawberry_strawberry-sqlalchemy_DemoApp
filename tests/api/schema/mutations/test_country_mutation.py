@@ -1,5 +1,6 @@
 import pytest
 from httpx import AsyncClient
+from starlette.requests import Headers
 
 from src.database.session_manager import DatabaseSessionManager
 from tests.api.schema.mutations.coutry_mutation import (
@@ -11,7 +12,7 @@ from tests.api.schema.mutations.coutry_mutation import (
 
 @pytest.mark.asyncio
 async def test_add_country(
-    async_client: AsyncClient, session: DatabaseSessionManager
+    async_client: AsyncClient, session: DatabaseSessionManager, token: str
 ) -> None:
     mutation, expected = add_country_mutation()
     resp = await async_client.post(
@@ -19,6 +20,7 @@ async def test_add_country(
         json={
             "query": mutation,
         },
+        headers=Headers(headers={"Authorization": f"Bearer {token}"}),
     )
     assert resp.status_code == 200
     actual = resp.json()
@@ -27,7 +29,7 @@ async def test_add_country(
 
 @pytest.mark.asyncio
 async def test_update_country(
-    async_client: AsyncClient, session: DatabaseSessionManager
+    async_client: AsyncClient, session: DatabaseSessionManager, token: str
 ) -> None:
     mutation, expected = update_country_mutation()
     resp = await async_client.post(
@@ -35,6 +37,7 @@ async def test_update_country(
         json={
             "query": mutation,
         },
+        headers=Headers(headers={"Authorization": f"Bearer {token}"}),
     )
     assert resp.status_code == 200
     actual = resp.json()
@@ -43,7 +46,7 @@ async def test_update_country(
 
 @pytest.mark.asyncio
 async def test_delete_country(
-    async_client: AsyncClient, session: DatabaseSessionManager
+    async_client: AsyncClient, session: DatabaseSessionManager, token: str
 ) -> None:
     mutation, expected = delete_country_mutation()
     resp = await async_client.post(
@@ -51,6 +54,7 @@ async def test_delete_country(
         json={
             "query": mutation,
         },
+        headers=Headers(headers={"Authorization": f"Bearer {token}"}),
     )
     assert resp.status_code == 200
     actual = resp.json()
