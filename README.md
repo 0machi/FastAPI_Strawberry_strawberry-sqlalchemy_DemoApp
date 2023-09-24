@@ -26,5 +26,57 @@ flowchart LR
 ## Testing
 - $ task test
 
-## Render
-- https://fastapi-strawberry-strawberry-sqlalchemy.onrender.com/graphql
+## Demo with Render
+1. Get token
+```bash
+$ curl -Ss \
+-X POST \
+-H "Content-Type: application/json" \
+--data '{ "query": "mutation { login(input: { id: \"fceef692-010b-480f-899c-5a6e8bab23a7\", password: \"admin\" }) { tokenType accessToken severErrors { msg } } }" }' \
+https://fastapi-strawberry-strawberry-sqlalchemy.onrender.com/graphql | jq .
+```
+```json
+{
+  "data": {
+    "login": {
+      "tokenType": "bearer",
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmY2VlZjY5Mi0wMTBiLTQ4MGYtODk5Yy01YTZlOGJhYjIzYTciLCJleHAiOjE2OTU1NDg0MTh9.YFvZL07ZTFDURfdzaU_Xk096iz2nLdeJ2gBcgmL6xSA",
+      "severErrors": []
+    }
+  }
+}
+```
+
+2. Excec query
+```bash
+curl -Ss \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmY2VlZjY5Mi0wMTBiLTQ4MGYtODk5Yy01YTZlOGJhYjIzYTciLCJleHAiOjE2OTU1NDg0MTh9.YFvZL07ZTFDURfdzaU_Xk096iz2nLdeJ2gBcgmL6xSA" \
+--data '{ "query": "query { cities { cities { cityId cityName population } } }" }' \
+https://fastapi-strawberry-strawberry-sqlalchemy.onrender.com/graphql | jq .
+```
+```json
+{
+  "data": {
+    "cities": {
+      "cities": [
+        {
+          "cityId": 1,
+          "cityName": "Los Angeles",
+          "population": 3849000
+        },
+        {
+          "cityId": 2,
+          "cityName": "Santa Monica",
+          "population": 91000
+        },
+        {
+          "cityId": 3,
+          "cityName": "Cebu",
+          "population": 3000000
+        }
+      ]
+    }
+  }
+}
+```
