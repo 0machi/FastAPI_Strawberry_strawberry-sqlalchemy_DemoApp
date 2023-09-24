@@ -8,6 +8,7 @@ from src.api.schema.mutations.user_mutation import UserMutation
 from src.api.schema.queries.city_query import CityQuery
 from src.api.schema.queries.country_query import CountryQuery
 from src.api.schema.types import strawberry_sqlalchemy_mapper
+from src.api.settings import settings
 
 strawberry_sqlalchemy_mapper.finalize()
 additional_types = list(strawberry_sqlalchemy_mapper.mapped_types.values())
@@ -17,5 +18,5 @@ schema = strawberry.Schema(
     query=all_queries, mutation=all_mutations, types=additional_types
 )
 graphql_app = GraphQLRouter[object, object](
-    schema=schema, context_getter=get_context
+    schema=schema, context_getter=get_context, graphiql=settings.env == "dev"
 )
