@@ -75,6 +75,7 @@ https://fastapi-strawberry-strawberry-sqlalchemy.onrender.com/graphql | jq .
 2. Excec query
 ```bash
 curl -Ss \
+-X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmY2VlZjY5Mi0wMTBiLTQ4MGYtODk5Yy01YTZlOGJhYjIzYTciLCJleHAiOjE2OTU1NDg0MTh9.YFvZL07ZTFDURfdzaU_Xk096iz2nLdeJ2gBcgmL6xSA" \
 --data '{ "query": "query { cities { cities { cityId cityName population } } }" }' \
