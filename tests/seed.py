@@ -27,6 +27,11 @@ admin = User(
     encrypted_password="$2a$10$Vr1WpWREGF/3xtq01HotUecfuS8AGK4LT7R6RlCtiqbk9QkRzwYxi",
 )
 
+schema_stmts: list[str] = [
+    "DROP SCHEMA IF EXISTS auth CASCADE;",
+    "CREATE SCHEMA IF NOT EXISTS auth;",
+]
+
 init_stmts: list[str] = [
     f"INSERT INTO auth.users VALUES('{admin.id}', '{admin.email}', '{admin.encrypted_password}');",
     f"INSERT INTO countries VALUES({us.country_id}, '{us.country_name}');",

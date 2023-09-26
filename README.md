@@ -39,17 +39,12 @@ end
 1. Run Docker
 - $ docker compose build --no-cache
 - $ docker compose up
-- $ docker compose start
-2. DB migration
-- $ task test
-  - Before testing, DB migration, formatting by autoflake, black, isort, pyupgrade, and type checking by mypy are performed by [taskipy](https://github.com/taskipy/taskipy).
-3. Run FastAPI
-- $ uvicorn src.api.app:server --host 0.0.0.0 --reload
-4. Access to GraghiQL
+2. Access to GraghiQL
 - http://localhost:8000/graphql
 
 ## Testing
 - $ task test
+  - Before testing, formatting by autoflake, black, isort, pyupgrade, and type checking by mypy are performed by [taskipy](https://github.com/taskipy/taskipy).
 
 ## Demo with Render
 1. Get token
