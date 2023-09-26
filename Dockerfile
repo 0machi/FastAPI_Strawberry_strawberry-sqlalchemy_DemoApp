@@ -31,6 +31,7 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 WORKDIR $PYSETUP_PATH
 RUN poetry install --no-root
 WORKDIR /app
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
 FROM builder-base as prod
 WORKDIR /app

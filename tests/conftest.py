@@ -17,7 +17,7 @@ from src.database.session_manager import (
     get_db,
     sessionmanager,
 )
-from tests.seed import admin, init_stmts
+from tests.seed import admin, init_stmts, schema_stmts
 
 
 @pytest.fixture()
@@ -49,11 +49,13 @@ async def session() -> AsyncIterator[DatabaseSessionManager]:
         version="15.3",
         password=db_config.password,
     ):
+        conn = await asyncpg.connect(db_config.dsn.replace("+asyncpg", ""))
+        for stmt in schema_stmts:
+            await conn.execute(stmt)
         sessionmanager.init(dsn=db_config.dsn)
         async with sessionmanager.connect() as connection:
             await sessionmanager.drop_all(connection)
             await sessionmanager.create_all(connection)
-        conn = await asyncpg.connect(db_config.dsn.replace("+asyncpg", ""))
         for stmt in init_stmts:
             await conn.execute(stmt)
         await conn.close()
